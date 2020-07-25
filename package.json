@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev": "nodemon app"
+  },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",

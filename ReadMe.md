@@ -9,7 +9,7 @@
 
 2. 执行 `cnpm install` 下载缺失的相关依赖；
 
-3. 执行 `babel-node app.js` 运行项目；
+3. 执行 `npm run dev` 运行项目；
 
 4. 在 <http://localhost:5050/> 查看项目。
 
