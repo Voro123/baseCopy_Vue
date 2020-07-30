@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+    "build": "webpack"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
