@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    li {
+      padding: 5px 0;
+    }
+
+    span {
+      padding-right: 20px;
+    }
+
+    button {
+      margin: 0 10px;
+      padding: 2px 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container" style="padding-left:100px">
+    <ul class="textul">
+      <li>
+        <span>{{ times }}</span>
+        <button @click="times++" :style="times>0?'color:red':'color:blue'">+1</button>
+        <button @click="times--" :style="times<0?'color:red':'color:blue'">-1</button>
+        <button @click="times=0">reset</button>
+      </li>
+      <li>
+        <span>{{ test1 }}</span>
+        <button @click="test1++">+1</button>
+        <button @click="test1--">-1</button>
+        <button @click="test1=0">reset</button>
+      </li>
+      <li>
+        <span>{{ test2 }}</span>
+        <button @click="test2++">+1</button>
+        <button @click="test2--">-1</button>
+        <button @click="test2=0">reset</button>
+      </li>
+    </ul>
+    <button @click="times++;test1++;test2++">+1</button>
+    <button @click="times--;test1--;test2--">-1</button>
+    <button @click="times=0;test1=0;test2=0">reset</button>
+    <button @click="document.querySelectorAll('li').forEach(el=>el.classList.toggle('demo'))">测试替换样式</button>
+    <br>
+    <div style="margin-top:20px">
+      <button @click="sayhi">methods测试1: 无括号输出</button>
+      <button @click="say('测试成功')">methods测试2: 带参数输出</button>
+      <button @click="getThis">methods测试3: 输出this</button>
+      <button @click="printTimes">methods测试4: 输出data对象值</button>
+    </div>
+    <ul>
+      <li v-for="i in times" @click="console.log(i)" style="cursor:pointer" :key="i">
+        {{ i }}
+      </li>
+    </ul>
+  </div>
+
+  <script type="module" src="/js/_vue/constructor.js"></script>
+  <script src="/js/index.js" defer="defer"></script>
+</body>
+
+</html>

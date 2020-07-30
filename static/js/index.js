@@ -1,7 +1,7 @@
 new _Vue({
   el: 'container',
   data: {
-    times: 0,
+    times: 2,
     test1: 1,
     test2: 2
   },

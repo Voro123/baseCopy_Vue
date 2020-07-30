@@ -4,7 +4,6 @@ const router = require('./router.js')
 const app = express()
 
 app.use('/', express.static('./static'))
-app.use('/', express.static('./views'))
 
 app.use(router)
 

@@ -14,7 +14,7 @@ function diff (oldVdom, newVdom, parent, index, consVue) {
   // 删除
   if (newVdom === undefined) {
     parent.removeChild(element)
-    return false
+    return true
   }
 
   // 替换
@@ -35,7 +35,7 @@ function diff (oldVdom, newVdom, parent, index, consVue) {
     // 获取属性和子节点的差异
     _diffProps(oldVdom, newVdom, element)
     _diffChildren(oldVdom, newVdom, element, consVue)
-    return true
+    return false
   }
 
   // 其他情况,返回undefined
@@ -78,7 +78,7 @@ function _diffChildren (oldVdom, newVdom, element, consVue) {
   // 遍历旧VD对象
   const vOldChildren = oldVdom.children
   const vNewChildren = newVdom.children
-  const oldVLen = vOldChildren.length
+  let oldVLen = vOldChildren.length
 
   for (let i = 0; i < oldVLen; i++) {
     let _newVdom // 对应要比较的新节点
@@ -88,7 +88,7 @@ function _diffChildren (oldVdom, newVdom, element, consVue) {
       // 查找新VD的子节点有没有对应key属性
       _newVdom = vNewChildren.find((childVd, i2) => {
         if (childVd?.props && oldVdom?.children[i].props) {
-          if (childVd.props.key === oldVdom.children[i].props.key) {
+          if (childVd.props.key.toString() === oldVdom.children[i].props.key) {
             // 找到的同时会移除数组的对应元素
             vNewChildren.splice(i2, 1)
             return true
@@ -125,10 +125,14 @@ function _diffChildren (oldVdom, newVdom, element, consVue) {
     }
 
     // 若新VD头元素没有key属性或没有对应key属性元素,正常渲染
-    diff(vOldChildren[i], vNewChildren[0], element, i, consVue)
+    if (diff(vOldChildren[i], vNewChildren[0], element, i, consVue)) {
+      i--
+      oldVLen--
+    }
     if (vNewChildren.length) {
       vNewChildren.splice(0, 1)
     }
+
   }
 
   // 若遍历完旧节点所有节点,新VD还有元素,将它们遍历完
