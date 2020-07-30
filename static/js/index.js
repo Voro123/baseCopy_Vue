@@ -1,9 +1,9 @@
 new _Vue({
   el: 'container',
   data: {
-    times: 2,
-    test1: 1,
-    test2: 2
+    times: 1,
+    test1: 2,
+    test2: 3
   },
   methods: {
     sayhi () {

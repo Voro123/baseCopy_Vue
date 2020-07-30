@@ -1,16 +1,21 @@
 import getType from './Tools/getType.js'
 import replaceStr from './replaceStr.js'
 
-// 将dom节点抽象成vd样式
+/* 将 dom 节点抽象成 vd 样式
+  el: 要转化的 dom 节点
+  consVue: 渲染组件的相应 _Vue 实例
+  vParent: 指向当前遍历节点的父节点 VD 对象
+  mapData: 该Map对象存放暂时变量,如 v-for="i in 3" 产生的 i 变量等
+*/
 function domToVd (el, consVue, vParent = null, mapData = new Map()) {
   let props = {}
   let children = []
 
   let vd = {
-    tag: el.localName,
-    props: props,
-    children: children,
-    mapData: null,
+    tag: el.localName, // [String] 元素标签
+    props: props,  // [Object] 元素属性对象
+    children: children, // [Array] 元素子节点集合
+    mapData: null, // [Map] 临时变量键值集合
   }
 
   // 遍历元素属性并添加入vd中
