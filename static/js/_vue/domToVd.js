@@ -42,6 +42,7 @@ function domToVd (el, consVue, vParent = null, mapData = new Map()) {
         arrSplit[0] = arrSplit[0].trim()
         arrSplit[1] = arrSplit[1].trim()
 
+        // 重复定义属性报错
         if (consVue.data[arrSplit[0]] !== undefined) {
           throw Error(`repeat define variable ${arrSplit[0]}`)
         }
@@ -80,10 +81,13 @@ function domToVd (el, consVue, vParent = null, mapData = new Map()) {
           return undefined
         }
 
+        /* 将需要重复的元素添加入父节点的子节点,重复指定循环次数-1,然后再渲染
+        当前元素作为最后一个 */
         for (let i in arr) {
           if ((Number)(i) === arrLen - 1) { break }
           vParent.children.push(domToVd(el_copy, consVue, vParent,
-            new Map([...mapData, ...[[arrSplit[0], arr[i]]]])))
+            new Map([...mapData, ...[[arrSplit[0], arr[i]]]])
+          ))
         }
         mapData = new Map([...mapData, ...[[arrSplit[0], arr[arrLen - 1]]]])
         break
